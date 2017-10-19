@@ -25,7 +25,7 @@ SECRET_KEY = '_^&t-p=kw-vr6hp%(_)#yb+#c#i7m^7i$(r2b)c%-5*_j&nv!k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'Shubhangi.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'planner.pythonanywhere.com']
 
 
 # Application definition
