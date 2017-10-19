@@ -7,7 +7,7 @@ class Event(models.Model):
     username=models.ForeignKey('auth.User')
     eventname=models.CharField(max_length=500)
     description=models.TextField()
-    created_date=models.DateTimeField(blank=True,null=True)
+    created_date=models.DateTimeField(default=timezone.now)
     starting_date=models.DateTimeField(default=timezone.now)
     deadline_date=models.DateTimeField(blank=True,null=True)
 

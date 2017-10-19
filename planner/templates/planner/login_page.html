@@ -8,8 +8,21 @@
 <h2>One solution to all your procrastination troubles!! ;) </h2>
 </div>
 <div>
-<h3>Login to continue</h3>
-<br/>
+<h2>Here are some sample event reminders to show you guys how cool we are :)!!</h2>
+<hr>
+{% for event in events %}
+		<div>
+		<h3>{{event.eventname}}</h3>
+		<h5>{{event.description}}</h4>
+		<h5>This event was created on {{event.created_date}}</h4>
+		<h4>Dude/Dudess(?) You have to finish this by {{event.deadline_date}}</h6>
+		<h4> You have  days remaining!! Hurry up!! </h4>
+        
+		</div>
+		<hr>
+{% endfor %}
+</div>
+<div>
 <p> Not a member? Whatcha waiting for?</p>
 <button>Sign up!</button>
 </div>
