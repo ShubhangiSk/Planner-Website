@@ -100,7 +100,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+TIME_INPUT_FORMATS = [
+    '%I:%M %p',
+    '%H:%M:%S',
+    '%H:%M:%S.%f',
+    '%H:%M'
+]
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 

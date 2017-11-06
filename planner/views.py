@@ -4,11 +4,13 @@ from .models import Event
 from .forms import SignUpForm
 from .forms import EventForm
 from django.utils import timezone
+from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 import datetime
 # Create your views here.
 
-
+def i18n_javascript(request):
+  return admin.site.i18n_javascript(request)
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
     return render(request, 'planner/event_detail.html', {'event': event})

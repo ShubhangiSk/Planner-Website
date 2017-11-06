@@ -1,10 +1,13 @@
 from django import forms
-
+from django.contrib.admin import widgets
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Event
 
-
+class CustomAdminSplitDateTime(widgets.AdminSplitDateTime):
+    def __init__(self, attrs=None):
+        widgets1 = [widgets.AdminDateWidget, widgets.AdminTimeWidget(attrs=None, format='%I:%M %p')]
+        forms.MultiWidget.__init__(self, widgets1, attrs)
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
@@ -22,7 +25,7 @@ class EventForm(forms.ModelForm):
         widgets = {
             'eventname' : forms.TextInput(attrs={'class': 'input-mini'}),
             'description' : forms.TextInput(attrs={'class': 'input-mini'}),
-            'deadline_date': forms.SelectDateWidget(empty_label=("Choose Year", "Choose Month", "Choose Day"))
+            'deadline_date':forms.DateTimeInput(attrs={'type': 'date'})
         }
         fields=('eventname','description','deadline_date')
         
