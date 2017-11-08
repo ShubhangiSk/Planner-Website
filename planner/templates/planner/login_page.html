@@ -1,63 +1,69 @@
 {% extends 'planner/base.html' %}
 {% block content %}
+<!-- Page Content -->
+    <div class="container">
 
+      
 {% if user.is_authenticated %}
-<div>
-<h2> Dear {{ user.username }} here are your events!! </h2>
-<hr>
+<!-- Page Heading -->
+      <h1 class="my-4">{{ user.username }}'s events
+      </h1>
+	  <div class="row">
 {% for event in events %}
 		
-		<div>
-		<h3><a href="{% url 'event_detail' pk=event.pk %}">{{event.eventname}}</a></h3>
-		<h5>{{event.description}}</h5>
-		<h4>This event was created on {{event.created_date}}</h4>
-		<h4>{{event.username}} You have to finish this by {{event.deadline_date}}</h6>
-		<h4> {{event.get_remaining_days}}</h4>
-        
-		</div>
-		<hr>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+    
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="{% url 'event_detail' pk=event.pk %}">{{event.eventname}}</a>
+              </h4>
+              <p class="card-text">{{event.description}}</p>
+			  <h4 class="card-text">You have to finish this by {{event.deadline_date}}}</h4>
+			  <h4 class="card-text">{{event.get_remaining_days}}</h4>
+            </div>
+         
+        </div>
+		
 {% endfor %}
-</div>
-<div>
-{% endif %}
+</div>	
+{% endif %}		
+		
 
 {% if not user.is_authenticated %}
 <div>
-<h2>Here are some sample event reminders to show you guys how cool we are :)!!</h2>
-<h3>Start your goddamn Python Project</h3>
-<h5>Description needed? -_-</h5>
-<h4>
-This event was created on Oct. 19, 2017, 10:27 p.m.</h4>
+<h1 class="my-4">Here are some sample event reminders to show you guys how cool we are :)!!</h1>
 
-<h4>Dude/Dudess(?) You have to finish this by Oct. 27, 2017, 6 p.m.</h4>
+<div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Start your Python Project</a>
+              </h4>
+              <p class="card-text">Description needed? -_-</p>
+			  <h4 class="card-text">Dude/Dudess(?) You have to finish this by Oct. 27, 2017, 6 p.m.</h4>
+			  <h4 class="card-text">You have 3 days 8 hours 4 minutes remaining! Hurry up!!</h4>
+            </div>
+          
+        </div>
+		<div class="col-lg-4 col-sm-6 portfolio-item">
+          
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">You are failing in your IoT project :)</a>
+              </h4>
+              <p class="card-text">Still need an effing description? :)</p>
+			  <h4 class="card-text">Dude/Dudess(?) You have to finish this by Oct. 26, 2017, 6 p.m.</h4>
+			  <h4 class="card-text">You have 2 days 8 hours 6 minutes remaining! Hurry up!!</h4>
+            </div>
+          
+        </div>
+		
 
-<h4>You have 3 days 8 hours 4 minutes remaining! Hurry up!!</h4>
-
-
-
-<h3>You are failing in your IoT project :)</h3>
-<h5>Still need an effing description? :)</h5>
-
-<h4>This event was created on Oct. 20, 2017, 3:02 a.m.</h4>
-
-<h4>Dude/Dudess(?) You have to finish this by Oct. 26, 2017, 6 p.m.</h4>
-
-<h4>You have 2 days 8 hours 6 minutes remaining! Hurry up!!
-
-</h4>
-
-<h3>Don't even get me started on the second internals *sigh* </h3>
-<h5>FYL</h5>
-
-<h4>This event was created on Oct. 20, 2017, 3:05 a.m.</h4>
-
-<h4>Dude/Dudess(?) You have to finish this by Oct. 27, 2017, 6 p.m.</h4>
-
-<h4>Oopsie! Time is up! I hope you finished this event!
-
-</h4>
-
-
+</div>
+{% endif %}
+</div>
+    <!-- /.container -->
+{% if not user.is_authenticated %}
 <p> Not a member? Whatcha waiting for?</p>
 
 <a href="{% url 'sign_up' %}" ><button>Sign up!</button>
