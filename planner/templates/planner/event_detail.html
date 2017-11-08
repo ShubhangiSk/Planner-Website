@@ -30,6 +30,17 @@
 		<h5>This event was originally created on {{event.starting_date}}</h5>
 		<h3> Dear {{event.username}} You have to finish this by {{event.deadline_date}}</h3>
 		<h3> {{event.get_remaining_days}}</h3>
+		
+		<div title="Add to Calendar" class="addeventatc">
+    Add to Calendar
+    <span class="start">{{event.deadline_date}}</span>
+ 
+    <span class="timezone">Asia/Kolkata</span>
+    <span class="title">{{ event.eventname }}</span>
+    <span class="description">>{{event.description}}</</span>
+    
+</div>
+
         <br>
 		<br>
     </div>
