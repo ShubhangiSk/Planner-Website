@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^official_events/?$',views.official_events, name='official_events'),
     url(r'^personal_events/?$',views.personal_events, name='personal_events'),
     url(r'^fun_events/?$',views.fun_events, name='fun_events'),
+    url(r'^past_events/?$',views.past_events, name='past_events'),
 ]

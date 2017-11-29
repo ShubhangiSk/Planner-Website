@@ -23,29 +23,34 @@ def event_new(request):
             event = form.save(commit=False)
             event.username = request.user
             event.starting_date =timezone.now()
+            abc=event.get_remaining_days()
             event.save()
             return redirect('login_page')
     else:
         form = EventForm()
     return render(request, 'planner/add_new_event.html', {'form': form})
 
+def  past_events(request):
+    events=Event.objects.filter(username=request.user, event_completed=True).order_by('priority')
+    return render(request, 'planner/login_page.html', {'events':events})
+
 
 def  official_events(request):
-    events=Event.objects.filter(username=request.user, category="official_event").order_by('priority')
+    events=Event.objects.filter(username=request.user, category="official_event", event_completed=False).order_by('priority')
     return render(request, 'planner/login_page.html', {'events':events})
 
 def  personal_events(request):
-    events=Event.objects.filter(username=request.user, category="personal_event").order_by('priority')
+    events=Event.objects.filter(username=request.user, category="personal_event", event_completed=False).order_by('priority')
     return render(request, 'planner/login_page.html', {'events':events})
 
 def  fun_events(request):
-    events=Event.objects.filter(username=request.user, category="fun_event").order_by('priority')
+    events=Event.objects.filter(username=request.user, category="fun_event", event_completed=False).order_by('priority')
     return render(request, 'planner/login_page.html', {'events':events})
 
 def event_delete(request,pk):
     event = get_object_or_404(Event, pk=pk)
     event.delete()
-    events=Event.objects.filter(username=request.user)
+    events=Event.objects.filter(username=request.user, event_completed=False).order_by('priority')
     return render(request, 'planner/login_page.html', {'events':events})
 
 def event_edit(request, pk):
@@ -66,9 +71,9 @@ def event_edit(request, pk):
 def login_page(request):
     if request.user.is_anonymous():
         uname=User.objects.get(username='sample')
-        events=Event.objects.filter(username=uname).order_by('priority')
+        events=Event.objects.filter(username=uname, event_completed=False).order_by('priority')
     else:  
-        events=Event.objects.filter(username=request.user).order_by('priority')
+        events=Event.objects.filter(username=request.user,event_completed=False ).order_by('priority')
         cnt=0
         for e in events:
           cnt=cnt+1
