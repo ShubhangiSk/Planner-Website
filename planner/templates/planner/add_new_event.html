@@ -3,13 +3,42 @@
 {% block content %}
 <html>
 <body>
-    <h1>New Event!!</h1>
+    <div class="container">
+	  <hr>
+<table >
+	<tr>
+	<th style="border-left: 1px solid #ddd; border-right: 1px solid #ddd"><a href="/">&emsp; All events &emsp;</a></th>
+	<th style="border-right: 1px solid #ddd">&emsp; &emsp;</th>
+    <th style="border-left: 1px solid #ddd; border-right: 1px solid #ddd" ><a href="{% url 'official_events' %}">&emsp; Official events &emsp;</a></th>
+	<th style="border-right: 1px solid #ddd">&emsp; &emsp;</th>
+    <th style="border-left: 1px solid #ddd; border-right: 1px solid #ddd" ><a href="{% url 'personal_events' %}">&emsp; Personal events &emsp;</a></th>
+	<th style="border-right: 1px solid #ddd">&emsp; &emsp;</th>
+    <th style="border-left: 1px solid #ddd; border-right: 1px solid #ddd"><a href="{% url 'fun_events' %}">&emsp;Fun events &emsp;</a></th>
+  </tr>
+ </table>
+ <hr>
+  </div>
 	<center>
+	<br>
+	<h1>New Event!!</h1>
+	
+	<hr>
     <form method="POST" class="event-form">{% csrf_token %}
-        {{ form.as_p }}
+	<table>
+        {% for field in form %}
+		<tr><th>{{field.label_tag}} &nbsp;</th>
+		<td>{{field}}</td>
+		</tr>
+		<tr><th>&emsp;</th><td>&emsp;</td></tr>
+		{% endfor %}
+		</table>
+		
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 	</center>
+	<hr>
+	<br>
+	
 {% endblock %}
 </body>
 </html>

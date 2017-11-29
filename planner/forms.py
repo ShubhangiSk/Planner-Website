@@ -27,5 +27,5 @@ class EventForm(forms.ModelForm):
             'description' : forms.TextInput(attrs={'class': 'input-mini'}),
             'deadline_date':forms.DateTimeInput(attrs={'type': 'date'})
         }
-        fields=('eventname','description','deadline_date')
+        fields=('eventname','description','deadline_date','category','priority')
         

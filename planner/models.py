@@ -11,6 +11,10 @@ class Event(models.Model):
     created_date=models.DateTimeField(default=timezone.now)
     starting_date=models.DateTimeField(default=timezone.now)
     deadline_date=models.DateTimeField()
+    category_choices=(('official_event','Official Event'),('personal_event','Personal Event'),('fun_event','Fun Event'))
+    priority_choices=((1, 'High Priority'),(2,'Medium Priority'),(3,'Low Priority'))
+    category=models.CharField(max_length=20,choices=category_choices, default='personal_event')
+    priority=models.IntegerField(choices=priority_choices,default=1)
     event_completed=models.BooleanField(default=False)
 
     def create(self):
@@ -37,8 +41,35 @@ class Event(models.Model):
             if(minutes<0):
                 minutes=0
         
-            return "You have "+str(b.days)+" days "+str(b.seconds//3600)+" hours "+str((b.seconds//60)%60)+" minutes remaining! Hurry up!!"
+            return "You have "+str(b.days)+" days "+str(b.seconds//3600)+" hours "+str((b.seconds//60)%60)+" minutes remaining."
 
+
+    def get_category(self):
+        if self.category=="official_event":
+            return "This is an Official event"
+        elif self.category=="personal_event":
+            return "This is a personal event"
+        else:
+            return "Yayy! This is a fun event"
+
+    def get_priority(self):
+        if self.priority==1:
+            return "HIGH priority"
+        elif self.priority==2:
+            return "MEDIUM priority"
+        else:
+            return "LOW priority"
+
+    def get_color(self):
+        if self.priority==1:
+            return "red"
+        elif self.priority==2:
+            return "blue"
+        elif self.category=="fun_event":
+            return "hotpink"
+        else:
+            return "green"
+    
     def __str__(self):
         return self.eventname
 
