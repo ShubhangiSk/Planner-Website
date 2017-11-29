@@ -35,6 +35,8 @@ class Event(models.Model):
                 self.event_completed=True
                 self.save()
                 return "Oopsie! Time is up! I hope you finished this event!"
+            self.event_completed=False
+            self.save()
             hours=b.seconds//3600
             if(hours<0):
                 hours=0
